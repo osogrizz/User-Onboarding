@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup';
+import axios from 'axios';
 
 
 const UserForm = ({ values, errors, touched, isSubmitting }) => {
 
-  // const [user, setUser] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  //   tos: false
-  // });
+  const [users, setUsers] = useState({
+    name: '',
+    email: '',
+    password: '',
+    tos: false
+  });
 
   // const handleChange = (evt) => {
   //   evt.preventDefault()
@@ -62,9 +63,18 @@ const FormikUserForm = withFormik({
 
   handleSubmit(values, { resetForm, setErrors, setSubmitting, setStatus }) {
     // console.log('submit pressed!!!');
+    axios.post('https://reqres.in/api/users')
+      .then( response => {
+        console.log('res', response);
+        setSubmitting(false);
+        resetForm();
+      })
+      .catch( err => {
+        console.log(err);
+        setSubmitting(false);
+      })
     setStatus(values);
-    resetForm();
-    console.log(values);
+    // console.log(values);
   }
   
   
