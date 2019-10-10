@@ -6,12 +6,7 @@ import axios from 'axios';
 
 const UserForm = ({ values, errors, touched, isSubmitting }) => {
 
-  const [users, setUsers] = useState({
-    name: '',
-    email: '',
-    password: '',
-    tos: false
-  });
+  const [users, setUsers] = useState([])
 
   // const handleChange = (evt) => {
   //   evt.preventDefault()
